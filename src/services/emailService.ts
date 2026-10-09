@@ -30,17 +30,21 @@
 //     await sendEmail(to, subject, html);
 // }
 
-
-import { transporter } from "../config/mail";
+import { resend } from "../config/mail";
 import { welcomeEmailTemplate } from "../templates/welcome.template";
 
 const sendEmail = async (to: string, subject: string, html: string) => {
-    await transporter.sendMail({
-        from: process.env.EMAIL_FROM,
+    const { error } = await resend.emails.send({
+        from: process.env.EMAIL_FROM as string,
         to,
         subject,
         html,
     });
+
+    // The Resend SDK returns errors instead of throwing, so we throw them ourselves
+    if (error) {
+        throw new Error(error.message);
+    }
 };
 
 export const sendResetCodeEmail = async (to: string, code: string) => {
