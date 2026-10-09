@@ -24,7 +24,7 @@ export const swaggerSpec = {
       "**How to authorize:** call `POST /api/auth/login` (or `POST /api/admin/login` for admins), copy the `token`, " +
       "click **Authorize** and paste it (without the `Bearer ` prefix).",
   },
-  servers: [{ url: `http://localhost:${PORT}`, description: "Local development" }],
+  servers: [{ url: "/", description: "Current server" }],
   tags: [
     { name: "Auth", description: "Register, login, logout, profile and password reset" },
     { name: "Products", description: "Public: browse, search, filter, details and reviews" },
