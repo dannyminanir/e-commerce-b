@@ -1,5 +1,3 @@
-const PORT = Number(process.env.PORT) || 2000;
-
 // ---------- small helpers so the spec below stays short ----------
 const ref = (name: string) => ({ $ref: `#/components/schemas/${name}` });
 const jsonBody = (schema: object) => ({ required: true, content: { "application/json": { schema } } });
@@ -24,6 +22,7 @@ export const swaggerSpec = {
       "**How to authorize:** call `POST /api/auth/login` (or `POST /api/admin/login` for admins), copy the `token`, " +
       "click **Authorize** and paste it (without the `Bearer ` prefix).",
   },
+  // Relative URL: Swagger calls whichever host is serving the docs (Render or localhost)
   servers: [{ url: "/", description: "Current server" }],
   tags: [
     { name: "Auth", description: "Register, login, logout, profile and password reset" },
